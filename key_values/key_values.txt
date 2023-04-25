@@ -4,13 +4,6 @@ Every human being deserves a say in the decisions that affect his or her life; n
 Therefore we will work to increase public participation at every level of government and to ensure that our public representatives are fully accountable to the people who elect them.
 We will also work to create new types of political organizations that expand the process of participatory democracy by directly including citizens in the decision-making process.
 
-# Ecological Wisdom
-
-Human societies must operate with the understanding that we are part of and not separate from nature.
-We must maintain an ecological balance and live within the ecological and resource limits of our communities and our planet.
-We support a sustainable society that utilizes resources in such a way that future generations will benefit and not suffer from the practices of our generation.
-To this end we must have agricultural practices that replenish the soil; move to an energy efficient economy; and live in ways that respect the integrity of natural systems.
-
 # Social Justice and Equal Opportunity
 
 All persons should have the rights and opportunity to benefit equally from the resources afforded us by society and the environment.
@@ -21,7 +14,13 @@ barriers such as racism and class oppression,
 sexism and heterosexism,
 ageism and disability,
 all of which act to deny fair treatment and equal justice under the law.
-Nonviolence
+
+# Ecological Wisdom
+
+Human societies must operate with the understanding that we are part of and not separate from nature.
+We must maintain an ecological balance and live within the ecological and resource limits of our communities and our planet.
+We support a sustainable society that utilizes resources in such a way that future generations will benefit and not suffer from the practices of our generation.
+To this end we must have agricultural practices that replenish the soil; move to an energy efficient economy; and live in ways that respect the integrity of natural systems.
 
 # Nonviolence
 
