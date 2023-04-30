@@ -1,0 +1,15 @@
+.root {
+  padding: 0.5rem;
+}
+
+.root, .square {
+  display: grid;
+  place-content: center;
+}
+
+.square {
+  color: white;
+  font-size: 2rem;
+  border-radius: 0.5rem;
+  font-family: Optima, Candara, sans-serif;
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nationbuilder API</title>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      background-color: #C7E4C8;
+    }
+    #api-root {
+      height: 100%;
+      display: grid;
+      align-content: start;
+      justify-content: center;
+      grid-template-columns: 1fr minmax(75vw, 800px) 1fr;
+    }
+    input[type="time"]::-webkit-calendar-picker-indicator {
+      font-size: 150%;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="importmap">
+  {
+    "imports": {
+      "tag": "./src/tag.js",
+      "index": "./src/index.js",
+      "square": "./src/square.js",
+      "square-css": "./src/square.css",
+      "arrow-tags": "https://cdn.jsdelivr.net/npm/arrow-tags@1.0.0/dist/index.mjs",
+      "@arrow-js/core": "https://cdn.jsdelivr.net/npm/@arrow-js/core@1.0.0-alpha.9/dist/index.mjs"
+    },
+    "scopes": {
+      "https://cdn.jsdelivr.net/": {}
+    }
+  }
+  </script>
+  <script type="module">
+    import main from 'index';
+    main();
+  </script>
+</body>
