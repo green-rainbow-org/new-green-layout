@@ -32,12 +32,22 @@ class CustomTag extends HTMLElement {
     super();
     const shadow = this.attachShadow({mode: 'open'});
     this.data = reactive(this.constructor.setup);
+    shadow.adoptedStyleSheets = this.styles;
     toTag('body')`${this.root}`()(shadow);
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
     if (name in this.data) this.data[name] = newValue;
     this.shadowRoot.adoptedStyleSheets = this.styles;
+    this.changed?.call(this, name, oldValue, newValue);
+  }
+
+  connectedCallback() {
+    this.connected?.call(this);
+  }
+
+  disconnectedCallback() {
+    this.disconnected?.call(this);
   }
 }
 

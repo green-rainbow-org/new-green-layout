@@ -1,0 +1,50 @@
+/* grid-center */
+.calendar__navigation,
+.calendar__navigation > div {
+  display: grid;
+  align-content: center;
+  justify-content: center;
+}
+/* flex-fit */
+.calendar__navigation {
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+}
+
+/* button-simple */
+.calendar__navigation,
+.calendar__navigation > div,
+table.calendar__grid button {
+    border: none;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    font-family: Optima, Candara, sans-serif;
+    box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.12),
+               -3px 5px 6px 0px rgba(0, 0, 0, 0.12);
+}
+
+/* button-dull */
+table.calendar__grid button[previous-month],
+table.calendar__grid button[next-month] {
+  font-family: Optima, Candara, sans-serif;
+  background-color: rgba(64,64,64,0.25);
+  color: rgb(96, 0, 0);
+}
+
+/* button-main */
+.calendar__navigation > div,
+table.calendar__grid button {
+  background-color: #277125;
+  color: #EEFFDD;
+  border-radius: 0.25rem;
+  font-family: Optima, Candara, sans-serif;
+  box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.12),
+}
+
+/* button-select */
+table.calendar__grid button[selected] {
+  background-color: rgba(255,255,255,0.99);
+  color: black;
+  border-radius: 0.25rem;
+  font-family: Optima, Candara, sans-serif;
+  box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.12),
+}

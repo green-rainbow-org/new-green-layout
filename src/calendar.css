@@ -1,0 +1,9 @@
+.root {
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  grid-template-columns: 1fr;
+}
+.content {
+  margin-top: 0.5rem;
+}
