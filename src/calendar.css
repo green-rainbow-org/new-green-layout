@@ -1,9 +1,47 @@
-.root {
-  display: grid;
-  align-content: center;
-  justify-content: center;
-  grid-template-columns: 1fr;
+div.calendar__navigation {
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  font-family: var(--the-font-family);
+  grid-gap: 0.5rem;
+  & > div {
+    grid-template-columns: 1fr auto 1fr;
+    color: var(--main-text-color);
+    box-shadow: var(--the-box-shadow);
+    border-radius: var(--the-border-radius);
+    background-color: var(--major-background);
+    & > button {
+      border: none;
+      color: inherit;
+      cursor: pointer;
+      font-size: 140%;
+      background-color: transparent;
+    }
+  }
 }
-.content {
-  margin-top: 0.5rem;
+
+table.calendar__grid {
+  font-family: var(--the-font-family);
+  width: 100%;
+  & button {
+    color: var(--main-text-color);
+    box-shadow: var(--the-box-shadow);
+    border-radius: var(--the-border-radius);
+    background-color: var(--major-background);
+    font-size: 140%;
+    height: 1.75em;
+    width: 100%;
+    & > span {
+      pointer-events: none;
+    }
+  }
+  & button[previous-month],
+  & button[next-month] {
+    color: var(--error-text-color);
+    background-color: var(--dull-background);
+  }
+  & button[selected] {
+    color: var(--darkest-text-color);
+    box-shadow: var(--the-box-shadow);
+    border-radius: var(--the-border-radius);
+    background-color: var(--chosen-background);
+  }
 }

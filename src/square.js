@@ -1,4 +1,5 @@
 import squareCSS from 'square-css' assert { type: 'css' };
+import globalCSS from 'global-css' assert { type: 'css' };
 import { toTag, CustomTag } from 'tag';
 
 class Square extends CustomTag {
@@ -11,9 +12,11 @@ class Square extends CustomTag {
 
   get root() {
     const square = toTag('div')`${d => d.text}`({
-      data: this.data, class: 'square'
+      data: this.data, class: 'square centered'
     });
-    return toTag('div')`${square}`({ class: 'root' });
+    return toTag('div')`${square}`({
+      class: 'root centered'
+    });
   }
 
   get styles() {
@@ -22,7 +25,7 @@ class Square extends CustomTag {
     sheet.replaceSync(`.square {
       background-color: ${color};
     }`);
-    return [squareCSS, sheet];
+    return [globalCSS, squareCSS, sheet];
   }
 }
 

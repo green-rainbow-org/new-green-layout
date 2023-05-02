@@ -1,79 +1,56 @@
 import calendarCSS from 'calendar-css' assert { type: 'css' };
-import lionCalCSS from 'lion-cal-css' assert { type: 'css' };
 import globalCSS from 'global-css' assert { type: 'css' };
-import { toTag, CustomTag } from 'tag';
 import { LionCalendar } from "@lion/calendar";
+import { toTag, CustomTag } from 'tag';
 
-const toLionCal = data => {
-  return class LionCal extends LionCalendar {
+const classify_grid = cal => {
+  const target = 'calendar__navigation';
+  const with_children = el => [el[0], ...el[0].children];
+  const els = with_children(cal.getElementsByClassName(target));
+  els.forEach(el => el.classList.add('centered'));
+}
+
+const initialize_calendar = records => {
+  const cal = records.reduce((a, r) => {
+    return [...a, ...r.addedNodes];
+  }, []).find(a => a.className === 'calendar');
+  if (cal !== undefined) classify_grid(cal);
+  return cal !== undefined;
+}
+
+const toCalendar = data => {
+  return class Calendar extends LionCalendar {
 
     constructor() {
       super();
-      this.mutate = new MutationObserver(() => {
-        if (this.hasDate) {
-          data.date = this.date.toISOString();
-          data.err = 0;
-        }
-        else {
-          data.date = null;
-          data.err = 1;
-        }
+      this.mutate = new MutationObserver((records) => {
+        if (initialize_calendar(records)) return;
+        data.date = this.date?.toISOString() || null;
+        data.err = +!this.hasDate;
       });
     }
 
     connectedCallback() {
       super.connectedCallback();
       const root = this.shadowRoot;
-      const sheets = [ globalCSS, lionCalCSS ];
-      root.adoptedStyleSheets = sheets;
+      root.adoptedStyleSheets = [
+        globalCSS, calendarCSS
+      ];
       this.mutate.observe(root, { 
-        subtree: true, childList: true,
-        attributes: true
+        subtree: true, childList: true, attributes: true
       });
     }
 
     get date() {
       if (this.hasDate === false) return null;
-      return this.shadowRoot.host.__centralDate;
+      return this.__centralDate;
     }
 
     get hasDate() {
-      const root = this.shadowRoot;
-      const central = root.host.__centralDate;
-      const selected = root.host.__selectedDate;
+      const central = this.__centralDate;
+      const selected = this.__selectedDate;
       if (!central || !selected) return false;
       return selected.getTime() === central.getTime();
-    }
-  }
-}
-
-const toCalendar = data => {
-  return class Calendar extends CustomTag {
-
-    constructor() {
-      super();
-    }
-
-    static get setup() {
-      return {
-        date: (new Date()).toISOString()
-      };
-    }
-
-    get root() {
-      const LionCal = toLionCal(data);
-      const cal = toTag('lion-cal', LionCal)``({
-        class: 'content', name: 'cal'
-      });
-      return toTag('div')`${cal}`({ class: 'root' });
-    }
-
-    get styles() {
-      return [calendarCSS];
-    }
-
-    changed(name, _, value) {
-      console.log(name, value);
     }
   }
 }

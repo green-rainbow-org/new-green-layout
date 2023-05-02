@@ -2,16 +2,12 @@
   padding: 0.5rem;
 }
 
-.root, .square {
-  display: grid;
-  place-content: center;
-}
-
 .square {
-  color: white;
-  cursor: pointer;
   padding: 1rem;
   font-size: 2rem;
-  border-radius: 0.5rem;
-  font-family: Optima, Candara, sans-serif;
+  cursor: pointer;
+  color: var(--main-text-color);
+  box-shadow: var(--the-box-shadow);
+  font-family: var(--the-font-family);
+  border-radius: var(--the-border-radius);
 }
