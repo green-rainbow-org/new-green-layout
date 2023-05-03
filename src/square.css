@@ -1,13 +1,14 @@
 .root {
-  padding: 0.5rem;
+  padding: var(--the-padding);
 }
 
 .square {
-  padding: 1rem;
   font-size: 2rem;
   cursor: pointer;
-  color: var(--main-text-color);
+  padding: var(--the-padding);
   box-shadow: var(--the-box-shadow);
   font-family: var(--the-font-family);
+  text-shadow: var(--basic-text-shadow);
   border-radius: var(--the-border-radius);
+  backdrop-filter: var(--the-blur);
 }

@@ -1,14 +1,20 @@
 * {
+  --the-padding: 0.5em;
+  --the-big-padding: 1.5em;
   --main-text-color: #EEFFDD;
-  --error-text-color: #600000;
-  --darkest-text-color: #000000;
-  --major-background: #277125;
-  --dull-background: rgba(64,64,64,0.25);
-  --chosen-background: rgba(255,255,255,0.99);
+  --error-text-color: #F070B0;
+  --darkest-text-color: #004466;
+  --dull-background: rgba(32,32,32,0.25);
+  --basic-background: rgba(180,220,220,0.25);
+  --major-background: rgba(83, 143, 94, 0.5);
+  --chosen-background: rgba(80, 255, 120, 0.5);
   --the-font-family: Optima, Candara, sans-serif;
   --the-box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.25),
-                   -3px 5px 6px 0px rgba(0, 0, 0, 0.25);
+                   -2px 4px 4px 0px rgba(0, 0, 0, 0.25),
+                   inset 0px 0px 5px rgba(200,255,200,0.25);
+  --basic-text-shadow: #033 0 0 5px;
   --the-border-radius: 0.25em;
+  --the-blur: blur( 0px );
 }
 
 button {
@@ -16,7 +22,39 @@ button {
   cursor: pointer;
 }
 
+.full-grid.content {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+}
+
+.row1-grid.centered-content {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.row2-grid.centered-content {
+  grid-column: 2;
+  grid-row: 2;
+}
+
 .centered {
   display: grid;
   place-content: center;
+}
+
+.centered.root.index {
+  height: 100%;
+  gap: 1.5rem;
+  align-content: start;
+  grid-template-rows: auto 1fr 1fr;
+  grid-template-columns: 1fr minmax(75vw, 800px) 1fr;
+}
+
+.centered.calendar.index {
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  padding: var(--the-big-padding);
+  box-shadow: var(--the-box-shadow);
+  border-radius: var(--the-border-radius);
+  background-color: var(--basic-background);
 }
