@@ -1,17 +1,25 @@
+@font-face {
+  font-family: "Truculenta";
+  src: url(/truculenta.ttf) format("truetype");
+}
+
 * {
   --the-padding: 0.5em;
   --the-big-padding: 1.5em;
   --main-text-color: #EEFFDD;
-  --error-text-color: #F070B0;
-  --darkest-text-color: #004466;
-  --dull-background: rgba(32,32,32,0.25);
-  --basic-background: rgba(180,220,220,0.25);
-  --major-background: rgba(83, 143, 94, 0.5);
-  --chosen-background: rgba(80, 255, 120, 0.5);
+  --darkest-text-color: #003010;
+  --dull-background: rgba(32,32,32,0.2);
+  --basic-background: rgba(180,220,220,0.2);
+  --major-background: rgba(83, 143, 94, 0.2);
+  --chosen-background: rgba(80, 255, 120, 0.2);
   --the-font-family: Optima, Candara, sans-serif;
+  --thin-font-family: "Truculenta", Helvetica, sans-serif;
   --the-box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.25),
                    -2px 4px 4px 0px rgba(0, 0, 0, 0.25),
                    inset 0px 0px 5px rgba(200,255,200,0.25);
+  --error-box-shadow: 0px 0px 3px 1px rgba(64, 10, 10, 0.25),
+                     -2px 4px 4px 0px rgba(64, 10, 10, 0.25),
+                     inset 0px 0px 5px rgba(200,20,20, 1.0);
   --basic-text-shadow: #033 0 0 5px;
   --the-border-radius: 0.25em;
   --the-blur: blur( 0px );

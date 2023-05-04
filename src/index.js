@@ -15,10 +15,10 @@ const handleResize = (d) => {
 const main = () => {
   const colors = [
     [
-      '--basic-background', '--main-text-color',
+      '--basic-background', '--the-box-shadow',
     ],
     [
-      '--dull-background', '--error-text-color'
+      '--dull-background', '--error-box-shadow'
     ]
   ];
   const data = reactive({
@@ -31,7 +31,7 @@ const main = () => {
   const props = { 
     class: 'centered-content row1-grid',
     background: ({err}) => colors[err % 2][0],
-    color: ({err}) => colors[err % 2][1],
+    shadow: ({err}) => colors[err % 2][1],
     text: ({ date }) => {
       const message = 'Pick a Date';
       if (date === null) return message;

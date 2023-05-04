@@ -1,6 +1,6 @@
 div.calendar__navigation {
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-  font-family: var(--the-font-family);
+  font-family: var(--thin-font-family);
   grid-gap: 0.5rem;
   & > div {
     grid-template-columns: 1fr auto 1fr;
@@ -10,11 +10,13 @@ div.calendar__navigation {
     border-radius: var(--the-border-radius);
     background-color: var(--major-background);
     backdrop-filter: var(--the-blur);
+    line-height: 50%;
+    font-size: 150%;
     & > button {
       border: none;
       color: inherit;
       cursor: pointer;
-      font-size: 140%;
+      font-size: inherit;
       background-color: transparent;
       text-shadow: var(--basic-text-shadow);
     }
@@ -22,8 +24,26 @@ div.calendar__navigation {
 }
 
 table.calendar__grid {
+  grid-auto-flow: row;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   font-family: var(--the-font-family);
+  padding-top: var(--the-padding);
+  display: grid;
   width: 100%;
+  gap: 0.25em;
+  & > thead {
+    display: contents;
+    & > tr {
+      display: contents;
+    }
+  }
+  & > tbody {
+    display: contents;
+    & > tr {
+      display: contents;
+    }
+  }
   & > thead > tr > th {
     padding: var(--the-padding);
     color: var(--main-text-color);
@@ -35,6 +55,7 @@ table.calendar__grid {
   & button {
     color: var(--main-text-color);
     box-shadow: var(--the-box-shadow);
+    font-family: var(--the-font-family);
     text-shadow: var(--basic-text-shadow);
     border-radius: var(--the-border-radius);
     background-color: var(--major-background);
@@ -48,7 +69,7 @@ table.calendar__grid {
   }
   & button[previous-month],
   & button[next-month] {
-    color: var(--error-text-color);
+    box-shadow: var(--error-box-shadow);
     background-color: var(--dull-background);
   }
   & button[selected] {

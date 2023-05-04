@@ -6,8 +6,9 @@
   font-size: 2rem;
   cursor: pointer;
   padding: var(--the-padding);
+  color: var(--main-text-color);
   box-shadow: var(--the-box-shadow);
-  font-family: var(--the-font-family);
+  font-family: var(--thin-font-family);
   text-shadow: var(--basic-text-shadow);
   border-radius: var(--the-border-radius);
   backdrop-filter: var(--the-blur);
