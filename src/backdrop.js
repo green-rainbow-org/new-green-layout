@@ -101,8 +101,8 @@ vec3 lch2rgb(float L, float C, float hue) {
 }
 
 vec3 lch_green(float l, float c, float h) {
-  float L = linear(vec2(.3, .7), l);
-  float C = linear(vec2(.25, .4), c);
+  float L = linear(vec2(.4, .7), l);
+  float C = linear(vec2(.25, .3), c);
   float hue = linear(vec2(2.5, 3.0), h);
   return lch2rgb(L, C, hue);
 }
@@ -155,6 +155,7 @@ vec3 wave(vec2 c, float dt) {
   );
   float added_white = 1. - 4.*pow(uv.y - .25, 2.);
   vec3 basic_background = vec3(220, 220, 220)/255.;
+  vec3 green_background = vec3(210, 240, 190)/255.;
   // Reference the corners
   vec2 max = max_rectilinear(u_shape);
   // Move and draw the leaf
@@ -169,8 +170,8 @@ vec3 wave(vec2 c, float dt) {
     vec3 green = lch_green(wv + uv.y, 1. - wv - uv.y, 1. - wv - uv.y);
     return mix(green, basic_background, 0.1);
   }
-  vec3 rain = lch_rainbow(wv + uv.y, 1. - wv - uv.y, 1. - wv - uv.y);
-  return mix(rain, basic_background, added_white);
+  vec3 rain = lch_green(wv + uv.y, 0.5 - uv.y, 1. - wv - uv.y);
+  return mix(rain, green_background, added_white);
 }
 
 void main() {
