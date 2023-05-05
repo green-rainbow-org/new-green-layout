@@ -23,7 +23,7 @@
   --basic-text-shadow: rgba(200, 255, 255, 0.75) 0 0 8px;
   --the-heading-margin: 0.5em 0;
   --the-border-radius: 0.25em;
-  --the-blur: blur( 0px );
+  --the-blur: blur( 5px );
 }
 
 button {
@@ -51,18 +51,22 @@ button {
   place-content: center;
 }
 
+.centered.root.wrapper {
+  grid-template-columns: 1fr auto 1fr;
+}
 .centered.root.index {
   height: 100%;
-  gap: 1.5rem;
+  grid-column: 2;
   align-content: start;
-  grid-template-rows: auto 1fr 1fr;
+  grid-template-rows: auto 3fr 1fr;
   grid-template-columns: 1fr minmax(75vw, 800px) 1fr;
 }
 
 .centered.calendar.index {
   grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: 1fr auto 1fr;
   padding: var(--the-big-padding);
+  backdrop-filter: var(--the-blur);
   box-shadow: var(--the-box-shadow);
   border-radius: var(--the-border-radius);
   background-color: var(--basic-background);

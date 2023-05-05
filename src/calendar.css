@@ -1,3 +1,6 @@
+div.calendar {
+  grid-row: 2;
+}
 div.calendar__navigation {
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
   font-family: var(--thin-font-family);

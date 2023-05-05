@@ -68,9 +68,12 @@ const main = () => {
   });
   const root_class = 'centered root index';
   document.adoptedStyleSheets = [ globalCSS ];
-  toTag('div')`
+  const root = toTag('div')`
     ${backdrop}${square}${calendar}
-  `({ class: root_class })(document.body);
+  `({ class: root_class });
+  return toTag('div')`${root}`({
+    class: 'centered root wrapper'
+  })(document.body);
 }
 
 export default main

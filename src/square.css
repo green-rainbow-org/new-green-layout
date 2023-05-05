@@ -1,8 +1,10 @@
 .root {
   padding: var(--the-padding);
+  grid-template-rows: 0.5rem auto 1rem;
 }
 
 .square {
+  grid-row: 2;
   font-size: 2rem;
   cursor: pointer;
   padding: var(--the-padding);

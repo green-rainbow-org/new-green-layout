@@ -100,37 +100,81 @@ vec3 lch2rgb(float L, float C, float hue) {
   return lab2rgb(L, C*cos(hue), C*sin(hue));
 }
 
-vec3 lch(float l, float c, float h) {
-  float L = linear(vec2(.6, .9), l);
-  float C = linear(vec2(.2, .5), c);
+vec3 lch_green(float l, float c, float h) {
+  float L = linear(vec2(.3, .7), l);
+  float C = linear(vec2(.25, .4), c);
   float hue = linear(vec2(2.5, 3.0), h);
   return lch2rgb(L, C, hue);
 }
 
-vec2 normalized(ivec2 shape) {
+vec3 lch_rainbow(float l, float c, float h) {
+  float L = linear(vec2(.7, .9), l);
+  float C = linear(vec2(.25, .4), c);
+  float hue = linear(vec2(3.2, 5.3), h);
+  return lch2rgb(L, C, mod(hue, 6.28));
+}
+
+vec2 max_rectilinear(ivec2 shape) {
   float norm = float(max(shape.x, shape.y));
-  vec2 max = 0.5 * vec2(shape) / norm;
-  float x = linear(vec2(0.5 - max.x, 0.5 + max.x), uv.x);
-  float y = linear(vec2(0.5 - max.y, 0.5 + max.y), uv.y);
+  return 0.5 * vec2(shape) / norm;
+}
+
+vec2 center_rectilinear(ivec2 shape, vec2 p) {
+  vec2 max = max_rectilinear(shape);
+  float x = linear(vec2(0.5 - max.x, 0.5 + max.x), p.x);
+  float y = linear(vec2(0.5 - max.y, 0.5 + max.y), p.y);
   return vec2(x, y);
 }
 
-vec3 wave(vec2 c, float dt) {
-  float amp = 0.2;
-  float phase = 3.14;
-  float k = 2. * 3.14;
-  float speed = 0.001;
-  float w = (
-    amp * sin(k*c.x + speed*dt)
-    +
-    0.25 * amp * sin(3.*k*c.x + speed*dt + phase)
+float leaf_top(float x) {
+  return ((3. - 3.*x) * sin(2. - 2.*x) + 1.)/4.;
+}
+
+float leaf_bottom(float x) {
+  return ((3.*x - 3.) * cos(2. - 2.*x) + 4.5*x - 3.5)/4.;
+}
+
+vec2 translate(vec2 p, float dx, float dy) {
+  mat3 trans = mat3(
+    1.0, 0.0, dx,
+    0.0, 1.0, dy,
+    0.0, 0.0, 1.0
   );
-  vec3 result = lch(1. - w - c.y, 0.1, 0.25);
-  return result;
+  vec3 p3 = vec3(p.x, p.y, 1.0);
+  return (p3 * trans).xy;
+}
+
+vec3 wave(vec2 c, float dt) {
+  float amp = 0.15;
+  float phase = 3.14;
+  float k = 1. * 3.14;
+  float speed = 0.002;
+  vec2 scale = 0.75*vec2(1., 0.5);
+  float wv = (
+    amp * sin(k*uv.x + speed*dt)
+  );
+  float added_white = 1. - 4.*pow(uv.y - .25, 2.);
+  vec3 basic_background = vec3(220, 220, 220)/255.;
+  // Reference the corners
+  vec2 max = max_rectilinear(u_shape);
+  // Move and draw the leaf
+  float dx = -0.6*max.x/2.;
+  float dy = -1.2*max.y/2.;
+  vec2 o = translate(c, dx, dy);
+  float ox = linear(vec2(-1./scale.x, 1./scale.x), o.x);
+  float oy = linear(vec2(1./scale.y, -1./scale.y), o.y);
+  float top = leaf_top(ox);
+  float bottom = leaf_bottom(ox);
+  if (top - oy > 0.05 && oy - bottom > 0.05) {
+    vec3 green = lch_green(wv + uv.y, 1. - wv - uv.y, 1. - wv - uv.y);
+    return mix(green, basic_background, 0.1);
+  }
+  vec3 rain = lch_rainbow(wv + uv.y, 1. - wv - uv.y, 1. - wv - uv.y);
+  return mix(rain, basic_background, added_white);
 }
 
 void main() {
-  vec2 c = normalized(u_shape);
+  vec2 c = center_rectilinear(u_shape, uv);
   color = vec4(wave(c, u_time), 1.0);
 }
 `
