@@ -60,7 +60,7 @@ void main() {
 uv = a_uv;
 
 // Clip coordinates
-vec2 full_pos = 2. * a_uv - 1.;
+vec2 full_pos = vec2(1., -1.) * (2. * a_uv - 1.);
 gl_Position = vec4(full_pos, 0., 1.);
 }`;
 
@@ -101,23 +101,18 @@ vec3 lch2rgb(float L, float C, float hue) {
 }
 
 vec3 lch(float l, float c, float h) {
-  float L = linear(vec2(.6, 1.), l);
-  float C = linear(vec2(.3, .6), c);
+  float L = linear(vec2(.6, .9), l);
+  float C = linear(vec2(.2, .5), c);
   float hue = linear(vec2(2.5, 3.0), h);
   return lch2rgb(L, C, hue);
 }
 
 vec2 normalized(ivec2 shape) {
   float norm = float(max(shape.x, shape.y));
-  float x_shape = float(shape.x);
-  float y_shape = float(shape.y);
-  float x_ratio = min(1., x_shape / norm);
-  float y_ratio = min(1., y_shape / norm);
-  float x_diff = 0.5 * (x_ratio - 1.);
-  float y_diff = 0.5 * (y_ratio - 1.);
-  float x = linear(vec2(-x_diff, 1.+x_diff), uv.x);
-  float y = linear(vec2(1.+y_diff, -y_diff), uv.y);
-  return vec2(clamp(x, 0., 1.), clamp(y, 0., 1.));
+  vec2 max = 0.5 * vec2(shape) / norm;
+  float x = linear(vec2(0.5 - max.x, 0.5 + max.x), uv.x);
+  float y = linear(vec2(0.5 - max.y, 0.5 + max.y), uv.y);
+  return vec2(x, y);
 }
 
 vec3 wave(vec2 c, float dt) {
@@ -130,10 +125,8 @@ vec3 wave(vec2 c, float dt) {
     +
     0.25 * amp * sin(3.*k*c.x + speed*dt + phase)
   );
-  vec3 bottom_color = lch(1., 1., 0.);
-  vec3 top_color = lch(0., 0., 1.0) * 0.75;
-  
-  return mix(top_color, bottom_color, w + 0.5 - c.y);
+  vec3 result = lch(1. - w - c.y, 0.1, 0.25);
+  return result;
 }
 
 void main() {

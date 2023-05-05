@@ -7,7 +7,8 @@ class Square extends CustomTag {
   static get setup() {
     return {
       text: '', shadow: '',
-      background: 'white'
+      background: 'white',
+      color: 'black'
     };
   }
 
@@ -21,11 +22,12 @@ class Square extends CustomTag {
   }
 
   get styles() {
-    const { shadow, background } = this.data;
+    const { color, shadow, background } = this.data;
     const sheet = new CSSStyleSheet();
     sheet.replaceSync(`.square {
       background-color: var(${background});
       box-shadow: var(${shadow});
+      color: var(${color});
     }`);
     return [globalCSS, squareCSS, sheet];
   }

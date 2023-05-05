@@ -3,6 +3,7 @@ div.calendar__navigation {
   font-family: var(--thin-font-family);
   grid-gap: 0.5rem;
   & > div {
+    grid-template-rows: auto;
     grid-template-columns: 1fr auto 1fr;
     color: var(--main-text-color);
     box-shadow: var(--the-box-shadow);
@@ -12,11 +13,14 @@ div.calendar__navigation {
     backdrop-filter: var(--the-blur);
     line-height: 50%;
     font-size: 150%;
+    & > h2 {
+      margin: var(--the-heading-margin);
+    }
     & > button {
       border: none;
       color: inherit;
       cursor: pointer;
-      font-size: inherit;
+      font-size: 150%;
       background-color: transparent;
       text-shadow: var(--basic-text-shadow);
     }
@@ -46,7 +50,7 @@ table.calendar__grid {
   }
   & > thead > tr > th {
     padding: var(--the-padding);
-    color: var(--main-text-color);
+    color: var(--darkest-text-color);
     box-shadow: var(--the-box-sladow);
     text-shadow: var(--basic-text-shadow);
     border-radius: var(--the-border-radius);
@@ -69,8 +73,8 @@ table.calendar__grid {
   }
   & button[previous-month],
   & button[next-month] {
-    box-shadow: var(--error-box-shadow);
     background-color: var(--dull-background);
+    color: var(--darkest-text-color);
   }
   & button[selected] {
     color: var(--darkest-text-color);
