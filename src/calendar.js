@@ -3,6 +3,8 @@ import globalCSS from 'global-css' assert { type: 'css' };
 import { LionCalendar } from "@lion/calendar";
 import { toTag, CustomTag } from 'tag';
 
+//console.log(calendarCSS);
+
 const classify_grid = cal => {
   const target = 'calendar__navigation';
   const with_children = el => [el[0], ...el[0].children];
