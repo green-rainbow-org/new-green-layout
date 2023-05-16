@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=0.8">
+  <link rel="icon" type="image/x-icon" href="./data/favicon48.png">
   <title>Young Green Layout</title>
   <style>
     html, body {
@@ -13,20 +14,21 @@
   </style>
 </head>
 <body>
-  <script src="./src/shims/css_nesting.js"></script>
+  <script src="./src/lib/css_nesting.js"></script>
   <script>
     const cssUrlMap = {
       "global-css": "./src/global.css",
-      "square-css": "./src/square.css",
-      "calendar-css": "./src/calendar.css"
+      "square-css": "./src/square/square.css",
+      "calendar-css": "./src/calendar/calendar.css",
+      "backdrop-css": "./src/backdrop/backdrop.css"
     }
     window.esmsInitOptions = {
       // Enable Shim Mode
       shimMode: true,
       // Enable newer modules features
-      polyfillEnable: ['css-modules', 'json-modules'],
+      polyfillEnable: ['css-modules'],
       onimport: async (url) => {
-        if (document.location.href !== url) return false;;
+        if (document.location.href !== url) return false;
         const imports = await window.modifyImports(cssUrlMap);
         const overrides = document.createElement('script');
         document.body.appendChild(Object.assign(overrides, {
@@ -40,12 +42,12 @@
   <script type="importmap-shim">
   {
     "imports": {
-      "tag": "./src/tag.js",
+      "tag": "./src/lib/tag.js",
       "index": "./src/index.js",
-      "center": "./src/center.js",
-      "square": "./src/square.js",
-      "calendar": "./src/calendar.js",
-      "backdrop": "./src/backdrop.js",
+      "square": "./src/square/square.js",
+      "calendar": "./src/calendar/calendar.js",
+      "backdrop": "./src/backdrop/backdrop.js",
+      "shaders": "./src/backdrop/shaders.js",
       "@lion/calendar": "https://ga.jspm.io/npm:@lion/calendar@0.20.1/index.js",
       "arrow-tags": "https://cdn.jsdelivr.net/npm/arrow-tags@1.0.0/dist/index.mjs",
       "@arrow-js/core": "https://cdn.jsdelivr.net/npm/@arrow-js/core@1.0.0-alpha.9/dist/index.mjs"
