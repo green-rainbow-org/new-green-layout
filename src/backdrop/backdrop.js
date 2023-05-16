@@ -1,4 +1,3 @@
-import backdropCSS from 'backdrop-css' assert { type: 'css' };
 import globalCSS from 'global-css' assert { type: 'css' };
 import { toTag, CustomTag } from 'tag';
 import { shaders } from 'shaders';
@@ -16,14 +15,6 @@ const toBackdrop = (data) => {
 
     get root() {
       return toTag('canvas')``();
-    }
-
-    get styles() {
-      const sheet = new CSSStyleSheet();
-      sheet.replaceSync(`{
-        background-color: blue;
-      }`);
-      return [globalCSS, backdropCSS, sheet];
     }
 
     draw() {

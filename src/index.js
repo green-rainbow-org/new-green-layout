@@ -1,3 +1,4 @@
+import backdropCSS from 'backdrop-css' assert { type: 'css' };
 import globalCSS from 'global-css' assert { type: 'css' };
 import { reactive } from '@arrow-js/core';
 import { toCalendar } from 'calendar';
@@ -12,7 +13,9 @@ const main = () => {
     height: window.innerHeight
   });
   window.addEventListener('resize', handleResize(data));
-  document.adoptedStyleSheets = [ globalCSS ];
+  document.adoptedStyleSheets = [
+    globalCSS, backdropCSS
+  ];
   // Date at the top
   const square = toSquare(data);
   // Interactive Calendar
