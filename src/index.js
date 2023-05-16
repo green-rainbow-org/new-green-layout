@@ -24,11 +24,11 @@ const main = () => {
   const backdrop = toBackdrop(data);
   // Containers
   const root = toTag('div')`
-    ${backdrop}${square}${calendar}
+    ${square}${calendar}
   `({
     class: 'centered root index'
   });
-  return toTag('div')`${root}`({
+  return toTag('div')`${backdrop}${root}`({
     class: 'centered root wrapper'
   })(document.body);
 }

@@ -46,7 +46,7 @@ const toBackdrop = (data) => {
     data,
     width: d => d.width,
     height: d => d.height,
-    class: 'full-grid backdrop content'
+    class: 'backdrop'
   });
 }
 
