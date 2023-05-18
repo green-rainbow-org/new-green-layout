@@ -39,14 +39,12 @@ const toCalendar = data => {
     }
   }
   return toTag('calendar', Calendar)``({ 
-    class: `
-      centered centered-content row2-grid calendar index
-    `,
+    class: 'calendar',
     data, date: d => d.date
   });
 }
 
-const classify_grid = cal => {
+const classify = cal => {
   const target = 'calendar__navigation';
   const with_children = el => [el[0], ...el[0].children];
   const els = with_children(cal.getElementsByClassName(target));
@@ -57,7 +55,7 @@ const initialize_calendar = records => {
   const cal = records.reduce((a, r) => {
     return [...a, ...r.addedNodes];
   }, []).find(a => a.className === 'calendar');
-  if (cal !== undefined) classify_grid(cal);
+  if (cal !== undefined) classify(cal);
   return cal !== undefined;
 }
 

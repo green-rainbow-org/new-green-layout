@@ -1,0 +1,53 @@
+.tox[role=application], .tox.tox-tinymce {
+  border: none;
+  backdrop-filter: var(--the-blur);
+  box-shadow: var(--the-box-shadow);
+  border-radius: var(--the-border-radius);
+  & div.tox-editor-header {
+    box-shadow: var(--the-box-shadow);
+    background-color: var(--major-background);
+    & .tox-toolbar-overlord {
+      background-color: transparent;
+      & .tox-toolbar__primary {
+        background-color: transparent;
+        & button.tox-tbtn--bespoke {
+          background-color: var(--basic-background);
+          color: var(--darkest-text-color);
+          width: 100px;
+        }
+        & button {
+          font-size: 150%;
+          & svg {
+            fill: var(--darkest-text-color);
+          }
+        }
+      }
+    }
+  }
+  & .tox-menu {
+    box-shadow: var(--the-box-shadow);
+    border-radius: var(--the-border-radius);
+    background-color: var(--bright-background);
+    & .tox-collection__group {
+      background-color: transparent;
+      & .tox-collection__item-label {
+        background-color: transparent;
+        font-size: 150%;
+      }
+      & .tox-collection__item--enabled {
+        background-color: var(--chosen-background);
+      }
+    }
+  }
+  & .tox-edit-area__iframe {
+    background-color: transparent;
+  }
+  & .tox-pop {
+    color: var(--darkest-text-color);
+    box-shadow: var(--the-box-shadow);
+    background-color: var(--bright-background);
+    & .tox-pop__dialog {
+      background-color: transparent;
+    }
+  }
+}

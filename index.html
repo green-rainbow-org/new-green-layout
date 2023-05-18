@@ -18,7 +18,9 @@
   <script>
     const cssUrlMap = {
       "global-css": "./src/global.css",
-      "square-css": "./src/square/square.css",
+      "form-css": "./src/form/form.css",
+      "nav-css": "./src/nav/nav.css",
+      "editor-css": "./src/editor/editor.css",
       "calendar-css": "./src/calendar/calendar.css",
       "backdrop-css": "./src/backdrop/backdrop.css"
     }
@@ -43,11 +45,15 @@
   {
     "imports": {
       "tag": "./src/lib/tag.js",
+      "phases": "./src/lib/phases.js",
       "index": "./src/index.js",
-      "square": "./src/square/square.js",
+      "form": "./src/form/form.js",
+      "editor": "./src/editor/editor.js",
+      "nav": "./src/nav/nav.js",
       "calendar": "./src/calendar/calendar.js",
       "backdrop": "./src/backdrop/backdrop.js",
       "shaders": "./src/backdrop/shaders.js",
+      "@tinymce/tinymce-webcomponent": "https://cdn.jsdelivr.net/npm/@tinymce/tinymce-webcomponent@2.0.2/dist/tinymce-webcomponent.js",
       "@lion/calendar": "https://ga.jspm.io/npm:@lion/calendar@0.20.1/index.js",
       "arrow-tags": "https://cdn.jsdelivr.net/npm/arrow-tags@1.0.0/dist/index.mjs",
       "@arrow-js/core": "https://cdn.jsdelivr.net/npm/@arrow-js/core@1.0.0-alpha.9/dist/index.mjs"

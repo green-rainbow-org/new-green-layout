@@ -145,8 +145,8 @@ vec3 wave(vec2 c, float dt) {
   float amp = 0.15;
   float phase = 3.14;
   float k = 0.75 * 3.14;
-  float speed = 0.001;
-  vec2 scale = 0.75*vec2(1., 0.5);
+  float speed = 0.002;
+  vec2 scale = 1.*vec2(1., 0.5);
   float wv = (
     amp * sin(k*uv.x + speed*dt)
   );

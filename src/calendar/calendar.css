@@ -1,5 +1,4 @@
 div.calendar {
-  grid-row: 2;
   & > div.calendar__navigation {
     grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
     font-family: var(--thin-font-family);
@@ -50,8 +49,9 @@ div.calendar {
       }
     }
     & > thead > tr > th {
-      height: 2.5rem;
-      line-height: 2.5rem;
+      height: 2rem;
+      line-height: 2rem;
+      margin-top: 0.5rem;
       color: var(--darkest-text-color);
       box-shadow: var(--the-box-sladow);
       border-radius: var(--the-border-radius);

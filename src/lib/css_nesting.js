@@ -78,7 +78,8 @@ const parseStringTokens = (str, indices) => {
   const has_pre = !(pre || '').match(/^\s*$/);
   const has_str = !(str || '').match(/^\s*$/);
   if (indices.length === 1 && has_str) {
-    return [{ type: 'selectors', value: [str] }];
+    const selectors = str.split(/,\s?/);
+    return [{ type: 'selectors', value: selectors }];
   }
   if (has_str && !has_pre && !has_post) {
     return [{ type: 'content', value: str, loc }];
@@ -158,24 +159,27 @@ const stringifyTokens = (parsed) => {
   }, '');
 }
 
+const toData = (response) => {
+  if (!response.ok) return null;
+  return response.text();
+}
+
+const toCSS = (text) => {
+  if (text === null) return null;
+  const prefix = 'data:text/css;base64,';
+  const tree = paren(text.replaceAll(/\s+/g, ' '));
+  const isNested = tree.some(s => Array.isArray(s) && s.length > 1);
+  if (!isNested) {
+    return prefix + btoa(text);
+  }
+  const parsed = parseTokens([])(tree, [0]);
+  return prefix + btoa(stringifyTokens(parsed));
+}
+
 window.modifyImports = async (oldImports) => {
   const cssFiles = Object.values(oldImports);
   const cssKeys = Object.keys(oldImports);
   const promises = cssFiles.reduce((o, cssFile) => {
-    const toData = (response) => {
-      if (!response.ok) return null;
-      return response.text();
-    }
-    const toCSS = (text) => {
-      const prefix = 'data:text/css;base64,';
-      const tree = paren(text.replaceAll(/\s+/g, ' '));
-      const isNested = tree.some(s => Array.isArray(s) && s.length > 1);
-      if (!isNested) {
-        return prefix + btoa(text);
-      }
-      const parsed = parseTokens([])(tree, [0]);
-      return prefix + btoa(stringifyTokens(parsed));
-    }
     o.push(fetch(cssFile).then(toData).then(toCSS));
     return o;
   }, []);

@@ -1,0 +1,14 @@
+.event-form {
+  grid-auto-rows: auto;
+  grid-template-columns: 1fr;
+  gap: var(--the-big-padding);
+  padding: var(--the-big-padding);
+  backdrop-filter: var(--the-blur);
+  box-shadow: var(--the-box-shadow);
+  border-radius: var(--the-border-radius);
+  background-color: var(--basic-background);
+
+  & h1 {
+    font-family: var(--thin-font-family);
+  }
+}

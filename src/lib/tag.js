@@ -6,7 +6,9 @@ const toTag = (key, customElement=null) => {
     return arrowTags(html)[key];
   }
   const tag = `green-rainbow-${key}`;
-  customElements.define(tag, customElement);
+  if (!customElements.get(tag)) {
+    customElements.define(tag, customElement);
+  }
   return arrowTags(html)[tag];
 }
 

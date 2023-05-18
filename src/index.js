@@ -1,13 +1,14 @@
 import backdropCSS from 'backdrop-css' assert { type: 'css' };
 import globalCSS from 'global-css' assert { type: 'css' };
 import { reactive } from '@arrow-js/core';
-import { toCalendar } from 'calendar';
 import { toBackdrop } from 'backdrop';
-import { toSquare } from 'square';
+import { toEventForm } from 'form';
+import { toNav } from 'nav';
 import { toTag } from 'tag';
 
 const main = () => {
   const data = reactive({
+    phase: 0,
     err: 1, date: null,
     width: window.innerWidth,
     height: window.innerHeight
@@ -17,14 +18,14 @@ const main = () => {
     globalCSS, backdropCSS
   ];
   // Date at the top
-  const square = toSquare(data);
-  // Interactive Calendar
-  const calendar = toCalendar(data);
+  const nav = toNav(data);
+  // Demo Form
+  const eventForm = toEventForm(data);
   // Animated Background
   const backdrop = toBackdrop(data);
   // Containers
   const root = toTag('div')`
-    ${square}${calendar}
+    ${nav}${eventForm}
   `({
     class: 'centered root index'
   });

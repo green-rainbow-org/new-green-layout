@@ -1,0 +1,23 @@
+.root {
+  padding: var(--the-padding);
+  grid-template-columns: 1fr auto 1fr;
+}
+
+.nav {
+  grid-row: 2;
+  cursor: pointer;
+  font-size: 175%;
+  gap: var(--the-padding);
+  color: var(--main-text-color);
+  font-family: var(--thin-font-family);
+  grid-template-columns: 1fr 2fr 1fr;
+  backdrop-filter: var(--the-blur);
+
+  & > div {
+    text-align: center;
+    padding: var(--the-padding);
+    box-shadow: var(--the-box-shadow);
+    text-shadow: var(--basic-text-shadow);
+    border-radius: var(--the-border-radius);
+  }
+}
