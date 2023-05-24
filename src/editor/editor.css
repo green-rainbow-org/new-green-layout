@@ -1,3 +1,46 @@
+.tox.tox-tinymce-aux {
+  & .tox-dialog-wrap__backdrop,
+  & > .tox-dialog-wrap > .tox-dialog,
+  & > .tox-pop > .tox-pop__dialog {
+    border: none;
+    backdrop-filter: var(--the-blur);
+    box-shadow: var(--the-box-shadow);
+    background-color: var(--white-background);
+    & > .tox-dialog__header,
+    & > .tox-dialog__footer {
+      color: var(--dark-text-color);
+      background-color: var(--major-background);
+      & .tox-button {
+        border: none;
+        color: var(--dark-text-color);
+        backdrop-filter: var(--the-blur);
+        box-shadow: var(--the-box-shadow);
+        border-radius: var(--the-border-radius);
+        background-color: var(--chosen-background);
+      }
+      & .tox-button--secondary {
+        background-color: var(--gray-background);
+      }
+    }
+    & > .tox-dialog__content-js {
+      & > .tox-label {
+        color: var(--main-text-color);
+      }
+    }
+  }
+  & > div {
+    & > .tox-toolbar__overflow,
+    & > .tox-tiered-menu > .tox-collection--list[role=menu] {
+      backdrop-filter: var(--the-blur);
+      box-shadow: var(--the-box-shadow);
+      background-color: var(--white-background);
+      & .tox-collection__item--active,
+      & .tox-collection__item--enabled {
+        background-color: var(--chosen-background);
+      }
+    }
+  }
+}
 .tox[role=application], .tox.tox-tinymce {
   border: none;
   backdrop-filter: var(--the-blur);
@@ -10,15 +53,10 @@
       background-color: transparent;
       & .tox-toolbar__primary {
         background-color: transparent;
-        & button.tox-tbtn--bespoke {
-          background-color: var(--basic-background);
-          color: var(--darkest-text-color);
-          width: 100px;
-        }
         & button {
           font-size: 150%;
           & svg {
-            fill: var(--darkest-text-color);
+            fill: var(--dark-text-color);
           }
         }
       }
@@ -27,7 +65,6 @@
   & .tox-menu {
     box-shadow: var(--the-box-shadow);
     border-radius: var(--the-border-radius);
-    background-color: var(--bright-background);
     & .tox-collection__group {
       background-color: transparent;
       & .tox-collection__item-label {
@@ -43,11 +80,18 @@
     background-color: transparent;
   }
   & .tox-pop {
-    color: var(--darkest-text-color);
+    color: var(--dark-text-color);
     box-shadow: var(--the-box-shadow);
-    background-color: var(--bright-background);
     & .tox-pop__dialog {
       background-color: transparent;
     }
+  }
+}
+
+.tox-toolbar__group {
+  & > button.tox-tbtn--bespoke {
+    background-color: var(--main-background);
+    color: var(--dark-text-color);
+    width: 100px;
   }
 }

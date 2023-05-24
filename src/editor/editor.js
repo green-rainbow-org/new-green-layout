@@ -4,7 +4,7 @@ import globalCSS from 'global-css' assert { type: 'css' };
 import { toTag } from 'tag';
 
 const toEditor = data => {
-  const plugins = 'link quickbars';
+  const plugins = 'link quickbars autosave';
   const toolbar = `
     quickimage link blockquote fontsize bold italic | undo redo
   `;
@@ -24,8 +24,11 @@ const toEditor = data => {
       margin-block-start: 7pt;
       margin-block-end: 7pt;
     }`,
+    autosave_interval: '1s',
+    autosave_prefix: 'tinymce',
     link_context_toolbar: true,
     font_size_formats: font_sizes,
+    autosave_restore_when_empty: true,
     link_assume_external_targets: 'https',
     quickbars_selection_toolbar: select,
     quickbars_insert_toolbar: insert,
@@ -34,6 +37,7 @@ const toEditor = data => {
     constructor() {
       super();
       this.mutate = new MutationObserver((records) => {
+        data.content = this.value;
         if (initialize_editor(records)) return;
       });
     }

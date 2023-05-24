@@ -2,13 +2,48 @@
   grid-auto-rows: auto;
   grid-template-columns: 1fr;
   gap: var(--the-big-padding);
+  color: var(--main-text-color);
   padding: var(--the-big-padding);
   backdrop-filter: var(--the-blur);
   box-shadow: var(--the-box-shadow);
   border-radius: var(--the-border-radius);
-  background-color: var(--basic-background);
+  background-color: var(--main-background);
 
-  & h1 {
-    font-family: var(--thin-font-family);
+  & > div {
+    font-size: 200%;
+    font-family: var(--the-font-family);
+    & > div {
+      display: grid;
+      gap: var(--the-padding);
+      & > div {
+      font-size: 80%;
+      display: grid;
+      gap: var(--the-padding);
+        & > strong {
+          font-family: var(--thick-font-family);
+        }
+      }
+      & > strong {
+        font-family: var(--thick-font-family);
+      }
+    }
+    & > div.options {
+      & > div {
+        display: grid;
+        gap: var(--the-padding);
+        grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
+        & > div {
+          cursor: pointer;
+          text-align: center;
+          padding: var(--the-padding);
+          backdrop-filter: var(--the-blur);
+          border-radius: var(--the-border-radius);
+          background-color: var(--white-background);
+          text-shadow: var(--main-text-shadow);
+          box-shadow: var(--the-box-shadow);
+          color: var(--main-text-color);
+        }
+      }
+    }
   }
 }

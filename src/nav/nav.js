@@ -2,16 +2,21 @@ import navCSS from 'nav-css' assert { type: 'css' };
 import globalCSS from 'global-css' assert { type: 'css' };
 import { backPhase, isFirstPhase } from 'phases';
 import { nextPhase, isLastPhase } from 'phases';
+import { phaseMap } from 'phases';
 import { toTag, CustomTag } from 'tag';
 
 const toNav = (data) => {
 
   const colors = [
     [
-      '--basic-background', '--main-text-color', '--the-box-shadow',
+      '--chosen-background', '--dark-text-color',
+      '--chosen-box-shadow', '--main-text-shadow',
+      'pointer'
     ],
     [
-      '--dull-background', '--darkest-text-color', '--error-box-shadow'
+      '--error-background', '--error-text-color',
+      '--error-box-shadow', '--error-text-shadow',
+      'default'
     ]
   ];
 
@@ -19,83 +24,117 @@ const toNav = (data) => {
 
     static get setup() {
       return {
-        text: ''
+        text: '', err: data.err
       };
     }
 
+    get date() {
+      return data.getPhaseDate(null);
+    }
+
+    set date(date) {
+      data.setPhaseDate(data.phase, date);
+    }
+
     get root() {
-      const back_text = () => {
-        const home = isFirstPhase(data.phase);
-        if (home) return 'Home';
-        return '← Back';
-      }
-      const next_text = () => {
-        const home = isLastPhase(data.phase);
-        if (home) return 'Done';
-        return 'Next →';
-      }
       const back = () => {
-        return toTag('div')`${back_text}`({
+        const not_event = 'just News';
+        const first = () => isFirstPhase(data.phase);
+        const text = `${['← Back', not_event][+first()]}`;
+        return toTag('div')`${text}`({
+          data: data,
           '@click': () => {
-            data.err = 1;
-            data.date = null;
-            data.phase = backPhase(data.phase);
+            if (first()) {
+              const event_phase = phaseMap.get('event');
+              data.phase = phaseMap.get('start');
+              data.setPhaseDate(event_phase, null);
+              data.is_event = false;
+            }
+            // Three atempts at skipping phases
+            data.phase = [...'...'].reduce(n => {
+              if (!data.skipInvalidPhase(n)) return n;
+              return backPhase(n);
+            }, backPhase(data.phase));
+            // Update date error message
+            this.date = data.getPhaseDate(null);
           }
         });
       }
       const next = () => {
-        return toTag('div')`${next_text}`({
+        const first = () => isFirstPhase(data.phase);
+        const last = () => isLastPhase(data.phase);
+        const act1 = ['Next →', 'an Event'][+first()];
+        const action = [act1, 'Submit'][+last()];
+        return toTag('div')`${action}`({
+          class: 'status',
           '@click': () => {
-            data.err = 1;
-            data.date = null;
-            data.phase = nextPhase(data.phase)
+            if (data.err) return; 
+            if (first()) data.is_event = true;
+            // Three atempts at skipping phases
+            data.phase = [...'...'].reduce(n => {
+              if (!data.skipInvalidPhase(n)) return n;
+              return nextPhase(n);
+            }, nextPhase(data.phase));
+            // Update date error message
+            this.date = data.getPhaseDate(null);
           }
         });
       }
-      const contents = () => {
+      const header = () => {
         return toTag('div')`${d => d.text}`({
-          data: this.data, class: 'contents',
+          class: 'centered-content',
+          data: this.data,
           "@click": () => {
-            if (data.err !== 0) {
-              data.date = (new Date()).toISOString();
+            if (this.date === null) {
+              this.date = (new Date()).toISOString();
               data.err = 0;
             }
           }
         });
       }
-      const nav = toTag('div')`${back}${contents}${next}`({
-        data: this.data, class: 'nav centered centered-content'
+      const nav = toTag('div')`${header}`({
+        class: 'nav centered grid-row1'
       });
-      return toTag('div')`${nav}`({
-        class: 'root centered'
+      const buttons = toTag('div')`${back}${next}`({
+        class: 'nav centered grid-row3'
+      });
+      return toTag('div')`${nav}${buttons}`({
+        class: 'content'
       });
     }
 
     get styles() {
       const i = data.err % colors.length;
-      const [background, color, shadow] = colors[i];
+      const [
+        background, color, shadow, text_shadow, cursor
+      ] = colors[i];
       const sheet = new CSSStyleSheet();
-      sheet.replaceSync(`.nav > .contents {
+      const last = isLastPhase(data.phase);
+      sheet.replaceSync(`
+      .nav > div.status {
         background-color: var(${background});
+        text-shadow: var(${text_shadow});
         box-shadow: var(${shadow});
         color: var(${color});
+        cursor: ${cursor};
       }`);
       return [globalCSS, navCSS, sheet];
     }
   }
 
   return toTag('nav', Nav)``({
-    class: 'centered-content grid-row1',
-    text: ({ date }) => {
+    class: 'content',
+    err: () => data.err,
+    text: () => {
       return [
+        'Welcome',
         'Event Date',
-        'Event Info',
+        'Content',
         'Display',
         'Removal',
-        'Thanks!'
+        'Review!'
       ][data.phase];
     },
-    phase: data.phase,
     data 
   });
 }

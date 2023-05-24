@@ -8,7 +8,7 @@ div.calendar {
       grid-template-columns: 1fr auto 1fr;
       color: var(--main-text-color);
       box-shadow: var(--the-box-shadow);
-      text-shadow: var(--basic-text-shadow);
+      text-shadow: var(--main-text-shadow);
       border-radius: var(--the-border-radius);
       background-color: var(--major-background);
       backdrop-filter: var(--the-blur);
@@ -23,7 +23,7 @@ div.calendar {
         cursor: pointer;
         font-size: 150%;
         background-color: transparent;
-        text-shadow: var(--basic-text-shadow);
+        text-shadow: var(--main-text-shadow);
       }
     }
   }
@@ -40,6 +40,15 @@ div.calendar {
       display: contents;
       & > tr {
         display: contents;
+        & > th {
+          height: 2rem;
+          line-height: 2rem;
+          margin-top: 0.5rem;
+          color: var(--main-text-color);
+          box-shadow: var(--the-box-sladow);
+          border-radius: var(--the-border-radius);
+          background-color: var(--gray-background);
+        }
       }
     }
     & > tbody {
@@ -48,20 +57,11 @@ div.calendar {
         display: contents;
       }
     }
-    & > thead > tr > th {
-      height: 2rem;
-      line-height: 2rem;
-      margin-top: 0.5rem;
-      color: var(--darkest-text-color);
-      box-shadow: var(--the-box-sladow);
-      border-radius: var(--the-border-radius);
-      background-color: var(--dull-background);
-    }
     & button {
       color: var(--main-text-color);
       box-shadow: var(--the-box-shadow);
       font-family: var(--the-font-family);
-      text-shadow: var(--basic-text-shadow);
+      text-shadow: var(--main-text-shadow);
       border-radius: var(--the-border-radius);
       background-color: var(--major-background);
       backdrop-filter: var(--the-blur);
@@ -75,16 +75,20 @@ div.calendar {
     }
     & button[previous-month],
     & button[next-month] {
-      background-color: var(--dull-background);
-      color: var(--darkest-text-color);
+      background-color: var(--gray-background);
+      color: var(--dark-text-color);
     }
     & button[selected] {
-      color: var(--darkest-text-color);
-      box-shadow: var(--the-box-shadow);
-      text-shadow: var(--basic-text-shadow);
+      color: var(--dark-text-color);
+      box-shadow: var(--chosen-box-shadow);
+      text-shadow: var(--main-text-shadow);
       border-radius: var(--the-border-radius);
       background-color: var(--chosen-background);
       backdrop-filter: var(--the-blur);
+    }
+    & button[disabled] {
+      cursor: default;
+      opacity: var(--the-hidden-opacity);
     }
   }
 }
