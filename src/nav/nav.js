@@ -45,8 +45,8 @@ const toNav = (data) => {
           data: data,
           '@click': () => {
             if (first()) {
-              const event_phase = phaseMap.get('event');
-              data.phase = phaseMap.get('start');
+              const event_phase = phaseMap.event || 0;
+              data.phase = phaseMap.start || 0;
               data.setPhaseDate(event_phase, null);
               data.is_event = false;
             }

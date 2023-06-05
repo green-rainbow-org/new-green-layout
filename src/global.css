@@ -59,6 +59,10 @@ button {
   grid-row: 1;
 }
 
+.display-none {
+  display: none;
+}
+
 .content {
   display: contents;
 }
@@ -76,6 +80,7 @@ button {
   grid-template-columns: 1fr auto 1fr;
   padding-bottom: 3rem;
 }
+
 .centered.root.index {
   height: 100%;
   grid-column: 2;

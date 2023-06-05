@@ -1,9 +1,9 @@
 const phases = [
   'welcome', 'event', 'text', 'start', 'end', 'review'
 ];
-const phaseMap = new Map(phases.map((label, phase) => {
-  return [label, phase];
-}));
+const phaseMap = phases.reduce((o, label, phase) => {
+  return { ...o, [label]: phase };
+}, {});
 const nPhases = phases.length;
 const maxPhase = nPhases - 1;
 const isPhase = (phase, label) => {

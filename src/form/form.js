@@ -1,6 +1,4 @@
 import eventFormCSS from 'form-css' assert { type: 'css' };
-import globalCSS from 'global-css' assert { type: 'css' };
-import '@tinymce/tinymce-webcomponent';
 import { toTag, CustomTag } from 'tag';
 import { phases, phaseMap, isPhase } from 'phases';
 import { toCalendar } from 'calendar';
@@ -26,8 +24,8 @@ const infos = {
 };
 const prefix = {
   'event': 'The event is on',
-  'start': 'Posting to our homepage on',
-  'end': 'Removing from our homepage on'
+  'start': 'Going on homepage on',
+  'end': 'Removing from homepage on'
 }
 
 const parseDate = (date_string) => {
@@ -44,7 +42,7 @@ const formatDate = (date) => {
 const toInfo = (what, phase, dates, date) => {
   const info_text = infos[phases[phase]](what);
   const all_d = ['start', 'event', 'end'].map(label => {
-    const date = dates[phaseMap.get(label)];
+    const date = dates[phaseMap[label] || 0];
     if (date === null) return null;
     return {label, d: parseDate(date)};
   }).filter(x => x).sort((a, b) => a.d-b.d).map(v => {
@@ -85,7 +83,7 @@ const toChoices = (what, phase, dates, setDate) => {
     return toTag('div')`${c[0]}`({
       '@click': () => {
         const basis = ['start', 'event'][+is_event];
-        const date = dates[phaseMap.get(basis)];
+        const date = dates[phaseMap[basis] || 0];
         if (date === null) return;
         const epoch = parseDate(date).getTime();
         const next_date = new Date(epoch + c[1]);
@@ -97,7 +95,7 @@ const toChoices = (what, phase, dates, setDate) => {
   return toTag('div')`${list}`({ class: 'options' });
 }
 
-const toEventForm = (data) => {
+const toEventForm = (data, globalCSS) => {
 
   class EventForm extends CustomTag {
 
@@ -131,13 +129,11 @@ const toEventForm = (data) => {
       }
       // Text Editor
       const editor = () => {
-        if (!data.hasEditor()) return '';
-        return toEditor(data);
+        return toEditor(data, globalCSS);
       }
       // Interactive Calendar
       const calendar = () => {
-        if (!data.hasCalendar()) return '';
-        return toCalendar(data);
+        return toCalendar(data, globalCSS);
       }
       return toTag('form')`${info}${choices}${editor}${calendar}`({
         class: 'event-form centered'

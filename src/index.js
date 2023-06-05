@@ -1,7 +1,7 @@
 import backdropCSS from 'backdrop-css' assert { type: 'css' };
 import globalCSS from 'global-css' assert { type: 'css' };
+import { phaseMap, isPhase, nPhases } from 'phases';
 import { reactive } from '@arrow-js/core';
-import { isPhase, nPhases } from 'phases';
 import { toBackdrop } from 'backdrop';
 import { toEventForm } from 'form';
 import { toNav } from 'nav';
@@ -11,6 +11,7 @@ const phase_list = [...Array(nPhases).keys()];
 
 const main = () => {
   const data = reactive({
+    phaseMap,
     content: '',
     is_event: true,
     phase: 0, err: 0,
@@ -59,7 +60,7 @@ const main = () => {
   // Date at the top
   const nav = toNav(data);
   // Demo Form
-  const eventForm = toEventForm(data);
+  const eventForm = toEventForm(data, globalCSS);
   // Animated Background
   const backdrop = toBackdrop(data);
   // Containers
