@@ -5,7 +5,7 @@ import { nextPhase, isLastPhase } from 'phases';
 import { phaseMap } from 'phases';
 import { toTag, CustomTag } from 'tag';
 
-const toNav = (data) => {
+const toNav = (data, actions) => {
 
   const colors = [
     [
@@ -69,6 +69,13 @@ const toNav = (data) => {
           class: 'status',
           '@click': () => {
             if (data.err) return; 
+            if (last()) {
+              actions.submitPage().then((pages) => {
+                console.log(pages);
+                alert('Done!');
+              });
+              return;
+            }
             if (first()) data.is_event = true;
             // Three atempts at skipping phases
             data.phase = [...'...'].reduce(n => {
