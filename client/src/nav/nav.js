@@ -29,11 +29,11 @@ const toNav = (data, actions) => {
     }
 
     get date() {
-      return data.getPhaseDate(null);
+      return data.getActiveDate(null);
     }
 
     set date(date) {
-      data.setPhaseDate(data.phase, date);
+      data.setActiveDate(date);
     }
 
     get root() {
@@ -46,8 +46,8 @@ const toNav = (data, actions) => {
           '@click': () => {
             if (first()) {
               const event_phase = phaseMap.event || 0;
+              data.updatePhase(event_phase, null);
               data.phase = phaseMap.start || 0;
-              data.setPhaseDate(event_phase, null);
               data.is_event = false;
             }
             // Three atempts at skipping phases
@@ -56,7 +56,7 @@ const toNav = (data, actions) => {
               return backPhase(n);
             }, backPhase(data.phase));
             // Update date error message
-            this.date = data.getPhaseDate(null);
+            this.date = data.getActiveDate(null);
           }
         });
       }
@@ -83,7 +83,7 @@ const toNav = (data, actions) => {
               return nextPhase(n);
             }, nextPhase(data.phase));
             // Update date error message
-            this.date = data.getPhaseDate(null);
+            this.date = data.getActiveDate(null);
           }
         });
       }

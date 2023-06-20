@@ -10,13 +10,13 @@
   background-color: var(--main-background);
 
   & > div {
-    font-size: 200%;
+    font-size: 180%;
     font-family: var(--the-font-family);
     & > div {
       display: grid;
       gap: var(--the-padding);
       & > div {
-      font-size: 80%;
+      font-size: 90%;
       display: grid;
       gap: var(--the-padding);
         & > strong {

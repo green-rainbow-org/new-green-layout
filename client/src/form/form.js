@@ -5,7 +5,11 @@ import { toCalendar } from 'calendar';
 import { toEditor } from 'editor';
 
 const infos = {
-  'welcome': () => 'Do you want to post an event, or just a news announcement?',
+  'welcome': () => `
+    Welcome to the content creator for the Green Rainbow Party. 
+    To post an event, a survey, or an announcement, please pick
+    the kind of content you'd like to post.
+  `,
   'event': what => `When will ${what} happen?`,
   'text': what => {
     const more = what.match(/event/i) ? ' description' : '';
@@ -17,8 +21,8 @@ const infos = {
     return `${ask} decide when to post ${what} to the homepage.`;
   },
   'end': what => {
-    const ask = `After ${what} has been posted,`;
-    return `${ask} when should it be removed from the homepage?`;
+    const ask = `After we post ${what},`;
+    return `${ask} how long should it stay on the homepage?`;
   },
   'review': what => `Are you ready to share ${what}?`
 };
@@ -70,15 +74,12 @@ const daysToMS = (days) => {
 const toChoices = (what, phase, dates, setDate) => {
   if (!isPhase(phase, 'end')) return toTag('div')``();
   const is_event = !!what.match(/event/i);
-  const all = [
-    [`Same day of ${what}`, daysToMS(0)],
-    [`One day after ${what}`, daysToMS(1)],
-    [`One week after ${what}`, daysToMS(7)],
+  const choices = [
     [`Two weeks after ${what}`, daysToMS(14)],
-    [`One month after ${what}`, daysToMS(30)],
+    [`Four weeks after ${what}`, daysToMS(28)],
     [`Two months after ${what}`, daysToMS(60)],
+    [`Four months after ${what}`, daysToMS(120)],
   ]
-  const choices = [all.slice(2), all.slice(0, -2)][+is_event];
   const items = choices.map(c => {
     return toTag('div')`${c[0]}`({
       '@click': () => {
@@ -104,11 +105,11 @@ const toEventForm = (data, globalCSS) => {
     }
 
     get date() {
-      return data.getPhaseDate(null);
+      return data.getActiveDate(null);
     }
 
     set date(date) {
-      data.setPhaseDate(data.phase, date);
+      data.setActiveDate(date);
     }
 
     get root() {
