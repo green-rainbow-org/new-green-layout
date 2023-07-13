@@ -1,4 +1,4 @@
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings
 from typing import Dict, List
 from util.models import HasBasicPage
 from util.models import HasSurvey

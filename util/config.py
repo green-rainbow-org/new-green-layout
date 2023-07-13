@@ -1,4 +1,4 @@
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings
 from pydantic import BaseModel
 from functools import lru_cache
 import json
